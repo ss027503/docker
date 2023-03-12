@@ -1,0 +1,23 @@
+# simple airsonic container. rename to docker-compose.yml
+
+---
+version: '2'
+services:
+  airsonic:
+    container_name: airsonic
+    image: linuxserver/airsonic
+    restart: unless-stopped
+    hostname: airsonic01
+    environment:
+      - VIRTUAL_PORT=4040
+      - VIRTUAL_HOST=music.ss027n4.net
+      - LETSENCRYPT_HOST=music.ss027n4.net
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /root/airsonic/config:/config
+      - /mnt/Media/Audio/Music:/music
+      - /mnt/Media/Audio/Playlists:/playlists
+      - /mnt/Media/Audio/Podcasts:/podcasts
+    network_mode: bridge
