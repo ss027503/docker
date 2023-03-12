@@ -1,0 +1,17 @@
+# ghost container stack for https
+
+version: '2'
+services:
+  ghost:
+    container_name: ghost-blog
+    image: ghost:latest
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - URL=https://blog.ss027n4.net
+      - VIRTUAL_HOST=blog.ss027n4.net
+      - LETSENCRYPT_HOST=blog.ss027n4.net
+      - LETSENCRYPT_EMAIL=ss027503@protonmail.com
+    volumes:
+      - /root/ghostblog/data:/var/lib/ghost/content
+    network_mode: bridge
