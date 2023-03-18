@@ -1,0 +1,22 @@
+---
+version: '2.1'
+services:
+  emby:
+    image: emby/embyserver:latest
+    container_name: emby
+    environment:
+      - VIRTUAL_PORT=8096
+      - VIRTUAL_HOST=media.ss027n4.net
+      - LETSENCRYPT_HOST=media.ss027n4.net
+      - LETSENCRYPT_EMAIL=ss027503@protonmail.com
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /root/emby02:/config
+      - /mnt/Media:/data
+      - /mnt/Backups/Media-Backups/backups:/data2
+    ports:
+      - 8096:8096
+    restart: unless-stopped
+    network_mode: bridge
